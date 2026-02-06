@@ -1,0 +1,162 @@
+<template>
+  <!-- Empty State -->
+  <template if:false={hasStorefronts}>
+    <div
+      class="slds-box slds-text-align_center slds-var-p-around_medium slds-var-m-top_small"
+    >
+      <p class="slds-text-color_weak">No storefronts found</p>
+    </div>
+  </template>
+
+  <!-- Carousel -->
+  <template if:true={hasStorefronts}>
+    <div
+      class="storefronts-container slds-grid slds-grid_vertical-align-center slds-gutters_small slds-var-m-top_small"
+    >
+      <!-- Navigation: Previous -->
+      <template if:true={hasMultiple}>
+        <lightning-button-icon
+          icon-name="utility:chevronleft"
+          alternative-text="Previous storefront"
+          title="Previous storefront"
+          variant="border-filled"
+          class="slds-var-m-horizontal_x-small"
+          onclick={handlePrevious}
+        >
+          <label>Previous Storefront</label>
+        </lightning-button-icon>
+      </template>
+
+      <!-- Storefront Card -->
+      <article
+        class="storefront-card slds-card slds-grid slds-grid_vertical slds-col"
+      >
+        <!-- Position Indicator -->
+        <template if:true={hasMultiple}>
+          <div
+            class="position-indicator slds-is-absolute slds-var-m-around_x-small slds-badge slds-theme_inverse"
+          >
+            {positionIndicator}
+          </div>
+        </template>
+
+        <!-- Image Section -->
+        <template if:true={fullImageUrl}>
+          <div class="image-container slds-size_1-of-1">
+            <img
+              src={fullImageUrl}
+              alt={currentStorefront.name}
+              class="storefront-image"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </template>
+        <template if:false={fullImageUrl}>
+          <div
+            class="image-placeholder slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-size_1-of-1"
+          >
+            <lightning-icon
+              icon-name="standard:restaurant"
+              size="large"
+            ></lightning-icon>
+          </div>
+        </template>
+
+        <!-- Content Section -->
+        <div class="content-section slds-var-p-around_medium">
+          <!-- Header with Name -->
+          <h3
+            class="storefront-name slds-text-heading_small slds-var-m-bottom_x-small"
+          >
+            {currentStorefront.name}
+          </h3>
+
+          <!-- Review Score Badge -->
+          <div
+            class="score-container slds-grid slds-grid_vertical-align-center slds-gutters_small slds-var-p-around_small slds-var-m-bottom_small slds-theme_alert-texture"
+          >
+            <div
+              class="score-badge slds-grid slds-grid_vertical-align-center slds-gutters_xx-small"
+            >
+              <span class="score-text">{formattedScore}</span>
+            </div>
+            <div
+              class="stars-container slds-grid slds-grid_vertical-align-center slds-col_bump-left"
+            >
+              <template for:each={stars} for:item="star">
+                <lightning-icon
+                  key={star.index}
+                  icon-name="utility:favorite"
+                  variant={star.variant}
+                  size="xx-small"
+                >
+                </lightning-icon>
+              </template>
+            </div>
+          </div>
+
+          <!-- Cuisine and Type Badges -->
+          <div
+            class="badges-row slds-grid slds-wrap slds-gutters_xx-small slds-var-m-bottom_small"
+          >
+            <template if:true={currentStorefront.cuisine}>
+              <lightning-badge
+                label={currentStorefront.cuisine}
+                class="cuisine-badge"
+              ></lightning-badge>
+            </template>
+            <template if:true={currentStorefront.storefrontType}>
+              <lightning-badge
+                label={currentStorefront.storefrontType}
+                class="type-badge"
+              ></lightning-badge>
+            </template>
+          </div>
+
+          <!-- Description -->
+          <template if:true={currentStorefront.description}>
+            <p
+              class="description-text slds-text-body_regular slds-text-color_weak slds-var-m-bottom_small"
+            >
+              {currentStorefront.description}
+            </p>
+          </template>
+
+          <!-- Contact Info -->
+          <template if:true={currentStorefront.address}>
+            <div
+              class="contact-info slds-grid slds-grid_vertical slds-gutters_x-small slds-border_top slds-var-p-top_small"
+            >
+              <div class="contact-row slds-media slds-media_center">
+                <lightning-icon
+                  class="slds-var-m-right_xx-small"
+                  icon-name="utility:location"
+                  size="xx-small"
+                ></lightning-icon>
+                <span
+                  class="contact-text slds-text-body_small slds-text-color_default"
+                  >{currentStorefront.address}</span
+                >
+              </div>
+            </div>
+          </template>
+        </div>
+      </article>
+
+      <!-- Navigation: Next -->
+      <template if:true={hasMultiple}>
+        <lightning-button-icon
+          icon-name="utility:chevronright"
+          alternative-text="Next storefront"
+          title="Next storefront"
+          variant="border-filled"
+          class="slds-var-m-horizontal_x-small"
+          onclick={handleNext}
+        >
+          <label>Next storefront</label>
+        </lightning-button-icon>
+      </template>
+    </div>
+  </template>
+</template>

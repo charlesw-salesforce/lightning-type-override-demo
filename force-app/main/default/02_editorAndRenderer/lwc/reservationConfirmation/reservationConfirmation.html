@@ -1,0 +1,102 @@
+<template>
+  <template if:false={hasReservation}>
+    <div
+      class="slds-box slds-text-align_center slds-var-p-around_medium slds-var-m-top_small"
+    >
+      <p class="slds-text-color_weak">Something went wrong</p>
+    </div>
+  </template>
+
+  <template if:true={hasReservation}>
+    <section class="slds-card slds-p-around_medium container">
+      <div class="slds-grid slds-wrap slds-gutters">
+        <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+          <div class="slds-media slds-media_center">
+            <div class="slds-media__figure">
+              <lightning-icon
+                icon-name={statusIcon}
+                alternative-text={reservation.status}
+                variant={statusVariant}
+                size="large"
+              ></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+              <h2 class="slds-text-heading_small slds-m-bottom_x-small">
+                Reservation Confirmed
+              </h2>
+              <p class="slds-text-body_regular slds-text-color_weak">
+                Your reservation has been successfully booked
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1">
+          <div class="confirmation-box">
+            <div class="slds-grid slds-wrap">
+              <div class="slds-col slds-size_1-of-1 slds-m-bottom_small">
+                <div class="confirmation-code">
+                  <span class="slds-text-body_small slds-text-color_weak"
+                    >Confirmation Code</span
+                  >
+                  <p class="slds-text-heading_medium slds-text-color_default">
+                    {reservation.confirmationCode}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+          <dl class="slds-dl_horizontal">
+            <dt class="slds-dl_horizontal__label">
+              <p class="slds-text-body_small slds-text-color_weak">Date</p>
+            </dt>
+            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+              <p class="slds-text-body_regular">{formattedDate}</p>
+            </dd>
+
+            <dt class="slds-dl_horizontal__label">
+              <p class="slds-text-body_small slds-text-color_weak">Time</p>
+            </dt>
+            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+              <p class="slds-text-body_regular">{formattedTime}</p>
+            </dd>
+
+            <dt class="slds-dl_horizontal__label">
+              <p class="slds-text-body_small slds-text-color_weak">Area</p>
+            </dt>
+            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+              <p class="slds-text-body_regular">{reservation.resourceName}</p>
+            </dd>
+
+            <dt class="slds-dl_horizontal__label">
+              <p class="slds-text-body_small slds-text-color_weak">Email</p>
+            </dt>
+            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+              <p class="slds-text-body_regular">{reservation.email}</p>
+            </dd>
+
+            <dt class="slds-dl_horizontal__label">
+              <p class="slds-text-body_small slds-text-color_weak">Phone</p>
+            </dt>
+            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+              <p class="slds-text-body_regular">{reservation.phone}</p>
+            </dd>
+
+            <dt class="slds-dl_horizontal__label">
+              <p class="slds-text-body_small slds-text-color_weak">Status</p>
+            </dt>
+            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+              <lightning-badge
+                label={reservation.status}
+                class="status-badge"
+              ></lightning-badge>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </template>
+</template>
