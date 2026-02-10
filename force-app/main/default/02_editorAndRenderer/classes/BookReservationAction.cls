@@ -14,29 +14,6 @@ public with sharing class BookReservationAction {
     }
   }
 
-  @AuraEnabled
-  public static Reservation.ReservationDTO bookFromLWC(
-    Reservation.ReservationRequest request
-  ) {
-    if (request == null) {
-      throw new AuraHandledException('Request cannot be null');
-    }
-
-    String confirmation = generateConfirmationCode(
-      request.reservationDate,
-      request.startTime
-    );
-    return new Reservation.ReservationDTO(
-      confirmation,
-      request.reservationDate,
-      request.startTime,
-      request.resourceName,
-      request.email,
-      request.phone,
-      'CONFIRMED'
-    );
-  }
-
   @InvocableMethod(
     label='Book Reservation'
     description='Books a reservation and returns a confirmation DTO.'
