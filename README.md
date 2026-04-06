@@ -93,4 +93,4 @@ You should see the custom Editor UI followed by a styled Confirmation card.
 
 ## License
 
-This project is released under the [CC0 1.0 Universal](LICENSE.md) license.
+This project is released under the [Apache License 2.0](LICENSE.md).
