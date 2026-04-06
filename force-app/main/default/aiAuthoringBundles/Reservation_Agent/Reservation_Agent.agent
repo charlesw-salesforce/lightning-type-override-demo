@@ -1,5 +1,5 @@
 system:
-   instructions: "You are an AI agent that helps customers manage and book reservations."
+   instructions: "You are an AI agent that helps customers manage reservations and find restaurants."
    messages:
        welcome: "Hi, I'm the Reservation Agent. How can I help you?"
        error: "Sorry, it looks like something has gone wrong."
@@ -29,6 +29,8 @@ start_agent topic_selector:
        actions:
            go_to_book_reservation: @utils.transition to @topic.reservation_management
                description: "Route to reservation booking. Call for reservation-related requests and ACTION_CONFIRM messages."
+           go_to_restaurant_search: @utils.transition to @topic.restaurant_search
+               description: "Route to restaurant search. Call when user wants to find or search for restaurants or storefronts."
 
 topic reservation_management:
     label: "Reservation Management"
@@ -74,3 +76,51 @@ topic reservation_management:
           include_in_progress_indicator: True
           progress_indicator_message: "Booking ..."
           source: "Book_Reservation"
+
+topic restaurant_search:
+    label: "Restaurant Search"
+
+    description: "Handles requests from users who want to search for restaurants or storefronts by name."
+
+    reasoning:
+        instructions: ->
+            | Ask the user what restaurant or storefront they are looking for.
+            | Once you have a name or partial name, call {!@actions.Get_Storefronts_By_Name} with the search term.
+            | After results are returned, display them to the user. Do NOT summarize the results in text.
+
+        actions:
+            Get_Storefronts_By_Name: @actions.Get_Storefronts_By_Name
+                with storefrontName = ...
+
+    actions:
+        Get_Storefronts_By_Name:
+          description: "Search for storefronts by name. Returns a list of matching storefronts displayed as a carousel."
+          inputs:
+            storefrontName: string
+              description: "The storefront name (or partial name) to search for."
+              label: "Storefront Name"
+              is_required: True
+              is_user_input: True
+          outputs:
+            storefronts: list[object]
+              description: "List of matching storefronts."
+              label: "Storefronts"
+              complex_data_type_name: "@apexClassType/c__AgentStorefrontActions$StorefrontSummary"
+              filter_from_agent: False
+              is_displayable: True
+            success: boolean
+              description: "True if successful."
+              label: "Success"
+              filter_from_agent: True
+              is_displayable: False
+            message: string
+              description: "User-readable status message."
+              label: "Message"
+              filter_from_agent: True
+              is_displayable: False
+          target: "apex://AgentStorefrontActions"
+          label: "Get Storefronts By Name"
+          require_user_confirmation: False
+          include_in_progress_indicator: True
+          progress_indicator_message: "Searching ..."
+          source: "Get_Storefronts_By_Name"

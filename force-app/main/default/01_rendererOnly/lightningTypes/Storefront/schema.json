@@ -1,0 +1,5 @@
+{
+  "title": "Storefront",
+  "description": "",
+  "lightning:type": "@apexClassType/c__AgentStorefrontActions$StorefrontSummary"
+}

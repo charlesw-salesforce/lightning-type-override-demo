@@ -1,0 +1,14 @@
+{
+  "required": ["request"],
+  "unevaluatedProperties": false,
+  "properties": {
+    "request": {
+      "title": "request",
+      "description": "The reservation details.",
+      "lightning:type": "c__reservationEditor",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": true
+    }
+  },
+  "lightning:type": "lightning__objectType"
+}

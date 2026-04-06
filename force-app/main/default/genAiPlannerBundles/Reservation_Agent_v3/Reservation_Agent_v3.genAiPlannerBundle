@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Reservation Agent description</description>
+    <localTopicLinks>
+        <genAiPluginName>reservation_management_16jaj000001y9Pd</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>restaurant_search_16jaj000001y9Pd</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>topic_selector_16jaj000001y9Pd</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>restaurant_search_16jaj000001y9Pd</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Handles requests from users who want to search for restaurants or storefronts by name.</description>
+        <developerName>restaurant_search_16jaj000001y9Pd</developerName>
+        <genAiPluginInstructions>
+            <description>You are an AI agent that helps customers manage reservations and find restaurants.</description>
+            <developerName>instruction0_179aj000002zJ9R</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179aj000002zJ9R</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Get_Storefronts_By_Name_179aj000002zJ9R</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Get_Storefronts_By_Name_179aj000002zJ9R</fullName>
+            <description>Search for storefronts by name. Returns a list of matching storefronts displayed as a carousel.</description>
+            <developerName>Get_Storefronts_By_Name_179aj000002zJ9R</developerName>
+            <invocationTarget>AgentStorefrontActions</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Get_Storefronts_By_Name</localDeveloperName>
+            <masterLabel>Get Storefronts By Name</masterLabel>
+            <progressIndicatorMessage>Searching ...</progressIndicatorMessage>
+            <source>Get_Storefronts_By_Name</source>
+        </localActions>
+        <localDeveloperName>restaurant_search</localDeveloperName>
+        <masterLabel>Restaurant Search</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>reservation_management_16jaj000001y9Pd</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Handles request from users who want to book a reservation.</description>
+        <developerName>reservation_management_16jaj000001y9Pd</developerName>
+        <genAiPluginInstructions>
+            <description>You are an AI agent that helps customers manage reservations and find restaurants.</description>
+            <developerName>instruction0_179aj000002zJ9T</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179aj000002zJ9T</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Book_Reservation_179aj000002zJ9T</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Book_Reservation_179aj000002zJ9T</fullName>
+            <description>Use this action to book a reservation.</description>
+            <developerName>Book_Reservation_179aj000002zJ9T</developerName>
+            <invocationTarget>BookReservationAction</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Book_Reservation</localDeveloperName>
+            <masterLabel>Book Reservation</masterLabel>
+            <progressIndicatorMessage>Booking ...</progressIndicatorMessage>
+            <source>Book_Reservation</source>
+        </localActions>
+        <localDeveloperName>reservation_management</localDeveloperName>
+        <masterLabel>Reservation Management</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>topic_selector_16jaj000001y9Pd</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Welcome the user and determine the appropriate topic based on user input</description>
+        <developerName>topic_selector_16jaj000001y9Pd</developerName>
+        <genAiPluginInstructions>
+            <description>You are an AI agent that helps customers manage reservations and find restaurants.</description>
+            <developerName>instruction0_179aj000002zJ9S</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179aj000002zJ9S</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>topic_selector</localDeveloperName>
+        <masterLabel>Topic Selector</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <masterLabel>Reservation Agent</masterLabel>
+    <plannerType>Atlas__ConcurrentMultiAgentOrchestration</plannerType>
+</GenAiPlannerBundle>

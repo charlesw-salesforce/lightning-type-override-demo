@@ -1,0 +1,18 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "c/storefrontDisplay"
+      }
+    }
+  },
+  "collection": {
+    "renderer": {
+      "componentOverrides": {
+        "$": {
+          "definition": "c/storefrontDisplay"
+        }
+      }
+    }
+  }
+}

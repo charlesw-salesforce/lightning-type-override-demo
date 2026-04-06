@@ -10,5 +10,6 @@
       "copilotAction:isUserInput" : true
     }
   },
-  "lightning:type" : "lightning__objectType"
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
 }
