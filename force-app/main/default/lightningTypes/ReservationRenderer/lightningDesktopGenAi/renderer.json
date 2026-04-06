@@ -2,7 +2,7 @@
   "renderer": {
     "componentOverrides": {
       "$": {
-        "definition": "c/reservationConfirmation"
+        "definition": "c/reservationCard"
       }
     }
   }

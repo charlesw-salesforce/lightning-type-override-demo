@@ -50,3 +50,6 @@ $RECYCLE.BIN/
 # AI agents
 .claude 
 .cursor 
+
+# Agent Builder
+agent.output

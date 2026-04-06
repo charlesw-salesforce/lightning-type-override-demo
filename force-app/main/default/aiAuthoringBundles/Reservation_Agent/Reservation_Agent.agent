@@ -1,0 +1,76 @@
+system:
+   instructions: "You are an AI agent that helps customers manage and book reservations."
+   messages:
+       welcome: "Hi, I'm the Reservation Agent. How can I help you?"
+       error: "Sorry, it looks like something has gone wrong."
+
+config:
+ developer_name: "Reservation_Agent"
+ agent_label: "Reservation Agent"
+ agent_type: "AgentforceEmployeeAgent"
+ description: "Reservation Agent description"
+
+variables:
+   reservation_submitted: mutable boolean = False
+   reservation_details: mutable object = None
+
+language:
+   default_locale: "en_US"
+   additional_locales: ""
+   all_additional_locales: False
+
+start_agent topic_selector:
+   label: "Topic Selector"
+   description: "Welcome the user and determine the appropriate topic based on user input"
+
+   reasoning:
+       instructions: ->
+           | Select the tool that best matches the user's message and conversation history. If it's unclear, make your best guess.
+       actions:
+           go_to_book_reservation: @utils.transition to @topic.reservation_management
+               description: "Route to reservation booking. Call for reservation-related requests and ACTION_CONFIRM messages."
+
+topic reservation_management:
+    label: "Reservation Management"
+
+    description: "Handles request from users who want to book a reservation."
+
+    reasoning:
+        instructions: ->
+            if not @variables.reservation_submitted:
+                | If ACTION_CONFIRM, call {!@actions.Book_Reservation} with the form data. Do NOT ask for confirmation or output any text.
+            else:
+                | Reservation booked. Call show_command to display the Book_Reservation result output. Do NOT output any text.
+
+        actions:
+            Book_Reservation: @actions.Book_Reservation
+                available when @variables.reservation_submitted == False
+                with request = ...
+                set @variables.reservation_submitted = True
+                set @variables.reservation_details = @outputs.result
+
+
+
+    actions:
+        Book_Reservation:
+          description: "Use this action to book a reservation."
+          inputs:
+            request: object
+              description: "The reservation details."
+              label: "request"
+              is_required: True
+              is_user_input: True
+              complex_data_type_name: "c__reservationEditor"
+          outputs:
+            result: object
+              description: "The reservation confirmation details."
+              label: "result"
+              complex_data_type_name: "c__reservationRenderer"
+              filter_from_agent: False
+              is_displayable: True
+          target: "apex://BookReservationAction"
+          label: "Book Reservation"
+          require_user_confirmation: False
+          include_in_progress_indicator: True
+          progress_indicator_message: "Booking ..."
+          source: "Book_Reservation"

@@ -7,9 +7,9 @@ public with sharing class BookReservationAction {
 
   public class ResponseWrapper {
     @InvocableVariable
-    public Reservation.ReservationDTO result;
+    public Reservation.ReservationConfirmation result;
 
-    public ResponseWrapper(Reservation.ReservationDTO result) {
+    public ResponseWrapper(Reservation.ReservationConfirmation result) {
       this.result = result;
     }
   }
@@ -34,13 +34,13 @@ public with sharing class BookReservationAction {
         req.startTime
       );
 
-      Reservation.ReservationDTO dto = new Reservation.ReservationDTO(
+      Reservation.ReservationConfirmation dto = new Reservation.ReservationConfirmation(
         confirmation,
         req.reservationDate,
         req.startTime,
-        req.resourceName,
-        req.email,
         req.phone,
+        req.numberOfGuests,
+        req.specialRequests,
         'CONFIRMED'
       );
       outputs.add(new ResponseWrapper(dto));

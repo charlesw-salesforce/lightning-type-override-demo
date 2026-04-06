@@ -31,16 +31,16 @@ public with sharing class Reservation {
   }
 
   public class ReservationRequest {
-    @AuraEnabled
+    @InvocableVariable(required=true)
     public Date reservationDate;
-    @AuraEnabled
+    @InvocableVariable(required=true)
     public String startTime;
-    @AuraEnabled
-    public String resourceName;
-    @AuraEnabled
-    public String email;
-    @AuraEnabled
+    @InvocableVariable(required=true)
     public String phone;
+    @InvocableVariable(required=true)
+    public Integer numberOfGuests;
+    @InvocableVariable
+    public String specialRequests;
 
     public ReservationRequest() {
     }
@@ -48,52 +48,52 @@ public with sharing class Reservation {
     public ReservationRequest(
       Date reservationDate,
       String startTime,
-      String resourceName,
-      String email,
-      String phone
+      String phone,
+      Integer numberOfGuests,
+      String specialRequests
     ) {
       this.reservationDate = reservationDate;
       this.startTime = startTime;
-      this.resourceName = resourceName;
-      this.email = email;
       this.phone = phone;
+      this.numberOfGuests = numberOfGuests;
+      this.specialRequests = specialRequests;
     }
   }
 
-  public class ReservationDTO {
-    @AuraEnabled
+  public class ReservationConfirmation {
+    @InvocableVariable(required=true)
     public String confirmationCode;
-    @AuraEnabled
+    @InvocableVariable(required=true)
     public Date reservationDate;
-    @AuraEnabled
+    @InvocableVariable(required=true)
     public String startTime;
-    @AuraEnabled
-    public String resourceName;
-    @AuraEnabled
-    public String email;
-    @AuraEnabled
+    @InvocableVariable(required=true)
     public String phone;
-    @AuraEnabled
+    @InvocableVariable(required=true)
+    public Integer numberOfGuests;
+    @InvocableVariable
+    public String specialRequests;
+    @InvocableVariable(required=true)
     public String status;
 
-    public ReservationDTO() {
+    public ReservationConfirmation() {
     }
 
-    public ReservationDTO(
+    public ReservationConfirmation(
       String confirmationCode,
       Date reservationDate,
       String startTime,
-      String resourceName,
-      String email,
       String phone,
+      Integer numberOfGuests,
+      String specialRequests,
       String status
     ) {
       this.confirmationCode = confirmationCode;
       this.reservationDate = reservationDate;
       this.startTime = startTime;
-      this.resourceName = resourceName;
-      this.email = email;
       this.phone = phone;
+      this.numberOfGuests = numberOfGuests;
+      this.specialRequests = specialRequests;
       this.status = status;
     }
   }

@@ -2,7 +2,7 @@
   "editor": {
     "componentOverrides": {
       "$": {
-        "definition": "c/reservationView"
+        "definition": "c/reservationForm"
       }
     }
   }

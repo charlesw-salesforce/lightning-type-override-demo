@@ -1,38 +1,32 @@
 <template>
   <section class="slds-card slds-p-around_medium container">
-    <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_medium">
+    <div class="slds-m-bottom_medium">
       <div class="slds-col slds-size_1-of-1 slds-m-bottom_x-small">
         <h2 class="slds-text-heading_small">Book a Reservation</h2>
       </div>
+    </div>
 
-      <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+    <div class="slds-grid slds-gutters slds-m-bottom_medium">
+      <div class="slds-col slds-size_1-of-2">
         <lightning-input
           type="date"
           label="Date"
           name="reservationDate"
           value={value.reservationDate}
           onchange={handleInputChange}
+          required
         ></lightning-input>
       </div>
 
-      <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4">
+      <div class="slds-col slds-size_1-of-2">
         <lightning-input
           type="time"
           label="Time"
           name="centerTime"
           value={centerTime}
           onchange={handleInputChange}
+          required
         ></lightning-input>
-      </div>
-
-      <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4">
-        <lightning-combobox
-          label="Area"
-          name="resourceName"
-          value={value.resourceName}
-          options={resourceOptions}
-          onchange={handleInputChange}
-        ></lightning-combobox>
       </div>
     </div>
 
@@ -77,26 +71,39 @@
       </div>
     </template>
 
-    <div class="slds-grid slds-wrap slds-gutters">
-      <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
-        <lightning-input
-          type="email"
-          label="Email"
-          name="email"
-          value={value.email}
-          onchange={handleInputChange}
-          required
-        ></lightning-input>
-      </div>
-
-      <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+    <div class="slds-grid slds-gutters slds-m-bottom_medium">
+      <div class="slds-col slds-size_1-of-2">
         <lightning-input
           type="tel"
           label="Phone"
           name="phone"
           value={value.phone}
           onchange={handleInputChange}
+          required
         ></lightning-input>
+      </div>
+
+      <div class="slds-col slds-size_1-of-2">
+        <lightning-input
+          type="number"
+          label="Guests"
+          name="numberOfGuests"
+          value={value.numberOfGuests}
+          min="1"
+          onchange={handleInputChange}
+          required
+        ></lightning-input>
+      </div>
+    </div>
+
+    <div class="slds-grid slds-gutters slds-m-bottom_medium">
+      <div class="slds-col slds-size_1-of-1">
+        <lightning-textarea
+          label="Special Requests"
+          name="specialRequests"
+          value={value.specialRequests}
+          onchange={handleInputChange}
+        ></lightning-textarea>
       </div>
     </div>
 

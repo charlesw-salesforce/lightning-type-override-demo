@@ -1,5 +1,0 @@
-{
-  "title": "ReservationConfirmation",
-  "description": "",
-  "lightning:type": "@apexClassType/c__Reservation$ReservationDTO"
-}

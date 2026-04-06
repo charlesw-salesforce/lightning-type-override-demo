@@ -5,13 +5,12 @@ export default class ReservationDemoApp extends LightningElement {
   centerTime = "18:00";
   reservationDate;
   startTime;
-  resourceName = "Dining Room";
-  email = "";
   phone = "";
+  numberOfGuests = 2;
+  specialRequests = "";
 
   loading = false;
   blocks = [];
-  resources = ["Dining Room", "Bar", "Patio"];
   toast = { visible: false, message: "" };
 
   @api
@@ -19,18 +18,18 @@ export default class ReservationDemoApp extends LightningElement {
     return {
       reservationDate: this.reservationDate,
       startTime: this.startTime,
-      resourceName: this.resourceName,
-      email: this.email,
-      phone: this.phone
+      phone: this.phone,
+      numberOfGuests: this.numberOfGuests,
+      specialRequests: this.specialRequests
     };
   }
   set value(val) {
     if (val) {
       this.reservationDate = val.reservationDate;
       this.startTime = val.startTime;
-      this.resourceName = val.resourceName || "Dining Room";
-      this.email = val.email || "";
       this.phone = val.phone || "";
+      this.numberOfGuests = val.numberOfGuests != null ? val.numberOfGuests : 2;
+      this.specialRequests = val.specialRequests || "";
     }
   }
 
@@ -41,13 +40,14 @@ export default class ReservationDemoApp extends LightningElement {
     this.loadSchedule();
   }
 
-  get resourceOptions() {
-    return this.resources.map((r) => ({ label: r, value: r }));
-  }
-
   get visibleBlocks() {
+    const seen = new Set();
     return (this.blocks || [])
-      .filter((b) => b.resourceName === this.resourceName)
+      .filter((b) => {
+        if (seen.has(b.startTime)) return false;
+        seen.add(b.startTime);
+        return true;
+      })
       .map((block) => ({
         ...block,
         buttonClass: this.getButtonClass(block.startTime)
@@ -68,7 +68,7 @@ export default class ReservationDemoApp extends LightningElement {
           }))
         : [];
     } catch (e) {
-      console.error("reservationView: Failed to load schedule", e);
+      console.error("reservationForm: Failed to load schedule", e);
       this.toast = {
         visible: true,
         message: "Something went wrong."

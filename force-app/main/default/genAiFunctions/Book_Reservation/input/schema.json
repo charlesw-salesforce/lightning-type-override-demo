@@ -5,7 +5,7 @@
     "request": {
       "title": "request",
       "description": "The reservation details.",
-      "lightning:type": "c__ReservationRequest",
+      "lightning:type": "c__reservationEditor",
       "lightning:isPII": false,
       "copilotAction:isUserInput": true
     }

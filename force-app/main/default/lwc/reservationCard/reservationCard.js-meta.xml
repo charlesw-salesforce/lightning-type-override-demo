@@ -9,11 +9,11 @@
         <targetConfig targets="lightning__AgentforceOutput">
             <property
         name="value"
-        type="c__ReservationConfirmation"
+        type="c__reservationRenderer"
         label="Reservation"
       />
         </targetConfig>
     </targetConfigs>
-    <masterLabel>Reservation Confirmation</masterLabel>
+    <masterLabel>Reservation Card</masterLabel>
     <description>Displays reservation confirmation details</description>
 </LightningComponentBundle>

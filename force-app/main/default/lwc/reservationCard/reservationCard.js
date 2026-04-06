@@ -1,6 +1,6 @@
 import { LightningElement, api } from "lwc";
 
-export default class ReservationConfirmation extends LightningElement {
+export default class ReservationCard extends LightningElement {
   @api value;
 
   reservation = {};
@@ -9,7 +9,7 @@ export default class ReservationConfirmation extends LightningElement {
     if (this.value) {
       this.reservation = this.value;
     } else {
-      console.error("reservationConfirmation: No value provided");
+      console.error("reservationCard: No value provided");
     }
   }
 

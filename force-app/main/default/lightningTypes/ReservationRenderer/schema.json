@@ -1,0 +1,5 @@
+{
+  "title": "reservationRenderer",
+  "description": "",
+  "lightning:type": "@apexClassType/c__Reservation$ReservationConfirmation"
+}

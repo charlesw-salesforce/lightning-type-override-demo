@@ -42,10 +42,10 @@ Shows both an **Editor Override** (custom form for input) and a **Renderer Overr
 | Component     | File                                                                                                              | Purpose                                                   |
 | ------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | Apex Action   | [`BookReservationAction.cls`](force-app/main/default/classes/BookReservationAction.cls)  | Accepts `ReservationRequest`, returns `ReservationDTO`    |
-| Editor LWC    | [`reservationView`](force-app/main/default/lwc/reservationView/)                         | Custom form (target: `lightning__AgentforceInput`)        |
-| Editor Type   | [`ReservationRequest`](force-app/main/default/lightningTypes/ReservationRequest/)        | Maps to `Reservation$ReservationRequest`                  |
-| Renderer LWC  | [`reservationConfirmation`](force-app/main/default/lwc/reservationConfirmation/)         | Confirmation card (target: `lightning__AgentforceOutput`) |
-| Renderer Type | [`ReservationConfirmation`](force-app/main/default/lightningTypes/ReservationConfirmation/) | Maps to `Reservation$ReservationDTO`                   |
+| Editor LWC    | [`reservationForm`](force-app/main/default/lwc/reservationForm/)                         | Custom form (target: `lightning__AgentforceInput`)        |
+| Editor Type   | [`ReservationEditor`](force-app/main/default/lightningTypes/ReservationEditor/)          | Maps to `Reservation$ReservationRequest`                  |
+| Renderer LWC  | [`reservationCard`](force-app/main/default/lwc/reservationCard/)                         | Confirmation card (target: `lightning__AgentforceOutput`) |
+| Renderer Type | [`ReservationRenderer`](force-app/main/default/lightningTypes/ReservationRenderer/)      | Maps to `Reservation$ReservationDTO`                      |
 
 
 ## Getting Started
@@ -59,13 +59,18 @@ Shows both an **Editor Override** (custom form for input) and a **Renderer Overr
 ### 1. Clone and Deploy
 
 ```bash
+# Clone the project
 git clone https://github.com/charlesw-salesforce/lightning-type-override-demo.git
 cd lightning-types-demo
+
+# Auth into Developer Edition org
 sf org login web --alias agentforce-demo
+
+# Deploy the project
 sf project deploy start --target-org agentforce-demo
 ```
 
-### 2. Assign Permission Set
+### 2. Assign Permission Set to Agent User
 
 Assign [`Agent Apex Action Access`](force-app/main/default/shared/permissionsets/Agent_Apex_Action_Access.permissionset-meta.xml) to your Agent's **EinsteinServiceAgent** user:
 

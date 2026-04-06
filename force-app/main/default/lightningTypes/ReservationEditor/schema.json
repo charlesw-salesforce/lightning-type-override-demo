@@ -1,5 +1,5 @@
 {
-  "title": "ReservationRequest",
+  "title": "reservationEditor",
   "description": "",
   "lightning:type": "@apexClassType/c__Reservation$ReservationRequest"
 }
