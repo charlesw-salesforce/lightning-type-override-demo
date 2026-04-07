@@ -30,7 +30,7 @@ export default class StorefrontDisplay extends LightningElement {
     const imageUrl = this.currentStorefront.imageUrl;
     if (!imageUrl) return null;
     if (imageUrl.startsWith("http")) return imageUrl;
-    return `${imageUrl}`;
+    return `https://pronto-app-demo-pronto-daa85e7f30cb.herokuapp.com${imageUrl}`;
   }
 
   get positionIndicator() {

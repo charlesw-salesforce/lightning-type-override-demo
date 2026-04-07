@@ -51,6 +51,13 @@
         <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
           <dl class="slds-dl_horizontal">
             <dt class="slds-dl_horizontal__label">
+              <p class="slds-text-body_small slds-text-color_weak">Name</p>
+            </dt>
+            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+              <p class="slds-text-body_regular">{reservation.guestName}</p>
+            </dd>
+
+            <dt class="slds-dl_horizontal__label">
               <p class="slds-text-body_small slds-text-color_weak">Date</p>
             </dt>
             <dd class="slds-dl_horizontal__detail slds-tile__meta">
@@ -62,6 +69,13 @@
             </dt>
             <dd class="slds-dl_horizontal__detail slds-tile__meta">
               <p class="slds-text-body_regular">{formattedTime}</p>
+            </dd>
+
+            <dt class="slds-dl_horizontal__label">
+              <p class="slds-text-body_small slds-text-color_weak">Seating</p>
+            </dt>
+            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+              <p class="slds-text-body_regular">{reservation.seatingType}</p>
             </dd>
 
             <dt class="slds-dl_horizontal__label">
@@ -78,12 +92,14 @@
               <p class="slds-text-body_regular">{reservation.numberOfGuests}</p>
             </dd>
 
-            <dt class="slds-dl_horizontal__label">
-              <p class="slds-text-body_small slds-text-color_weak">Special Requests</p>
-            </dt>
-            <dd class="slds-dl_horizontal__detail slds-tile__meta">
-              <p class="slds-text-body_regular">{reservation.specialRequests}</p>
-            </dd>
+            <template if:true={reservation.specialRequests}>
+              <dt class="slds-dl_horizontal__label">
+                <p class="slds-text-body_small slds-text-color_weak">Special Requests</p>
+              </dt>
+              <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                <p class="slds-text-body_regular">{reservation.specialRequests}</p>
+              </dd>
+            </template>
 
             <dt class="slds-dl_horizontal__label">
               <p class="slds-text-body_small slds-text-color_weak">Status</p>

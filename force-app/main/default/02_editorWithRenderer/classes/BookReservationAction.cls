@@ -38,10 +38,12 @@ public with sharing class BookReservationAction {
         confirmation,
         req.reservationDate,
         req.startTime,
+        req.guestName,
         req.phone,
         req.numberOfGuests,
         req.specialRequests,
-        'CONFIRMED'
+        'CONFIRMED',
+        req.seatingType
       );
       outputs.add(new ResponseWrapper(dto));
     }

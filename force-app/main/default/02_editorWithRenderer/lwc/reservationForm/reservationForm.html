@@ -7,7 +7,7 @@
     </div>
 
     <div class="slds-grid slds-gutters slds-m-bottom_medium">
-      <div class="slds-col slds-size_1-of-2">
+      <div class="slds-col slds-size_1-of-3">
         <lightning-input
           type="date"
           label="Date"
@@ -18,60 +18,42 @@
         ></lightning-input>
       </div>
 
-      <div class="slds-col slds-size_1-of-2">
-        <lightning-input
-          type="time"
+      <div class="slds-col slds-size_1-of-3">
+        <lightning-combobox
           label="Time"
-          name="centerTime"
-          value={centerTime}
+          name="startTime"
+          value={value.startTime}
+          options={timeOptions}
+          onchange={handleInputChange}
+          required
+        ></lightning-combobox>
+      </div>
+
+      <div class="slds-col slds-size_1-of-3">
+        <lightning-input
+          type="number"
+          label="Guests"
+          name="numberOfGuests"
+          value={value.numberOfGuests}
+          min="1"
           onchange={handleInputChange}
           required
         ></lightning-input>
       </div>
     </div>
 
-    <template if:true={loading}>
-      <div class="slds-is-relative slds-m-vertical_medium">
-        <lightning-spinner
-          alternative-text="Loading"
-          size="small"
-        ></lightning-spinner>
-      </div>
-    </template>
-
-    <template if:false={loading}>
-      <div class="slds-m-bottom_medium">
-        <div class="time-grid">
-          <template for:each={visibleBlocks} for:item="blk">
-            <div key={blk.blockId} class="time-block">
-              <template if:true={blk.isAvailable}>
-                <button
-                  onclick={handleBlockClick}
-                  data-start={blk.startTime}
-                  type="button"
-                  class={blk.buttonClass}
-                  aria-label={blk.displayTime}
-                >
-                  <span class="time">{blk.displayTime}</span>
-                </button>
-              </template>
-              <template if:false={blk.isAvailable}>
-                <button
-                  disabled
-                  type="button"
-                  class="time-button unavailable"
-                  aria-label={blk.displayTime}
-                >
-                  <span class="time">{blk.displayTime}</span>
-                </button>
-              </template>
-            </div>
-          </template>
-        </div>
-      </div>
-    </template>
-
     <div class="slds-grid slds-gutters slds-m-bottom_medium">
+      <div class="slds-col slds-size_1-of-2">
+        <lightning-input
+          type="text"
+          label="Name"
+          name="guestName"
+          value={value.guestName}
+          onchange={handleInputChange}
+          required
+        ></lightning-input>
+      </div>
+
       <div class="slds-col slds-size_1-of-2">
         <lightning-input
           type="tel"
@@ -82,17 +64,24 @@
           required
         ></lightning-input>
       </div>
+    </div>
 
-      <div class="slds-col slds-size_1-of-2">
-        <lightning-input
-          type="number"
-          label="Guests"
-          name="numberOfGuests"
-          value={value.numberOfGuests}
-          min="1"
-          onchange={handleInputChange}
-          required
-        ></lightning-input>
+    <div class="slds-m-bottom_medium">
+      <label class="slds-form-element__label">Seating Type</label>
+      <div class="seating-grid">
+        <template for:each={seatingOptions} for:item="opt">
+          <div key={opt.value} class="seating-block">
+            <button
+              onclick={handleSeatingClick}
+              data-value={opt.value}
+              type="button"
+              class={opt.buttonClass}
+              aria-label={opt.label}
+            >
+              <span class="seating-label">{opt.label}</span>
+            </button>
+          </div>
+        </template>
       </div>
     </div>
 
