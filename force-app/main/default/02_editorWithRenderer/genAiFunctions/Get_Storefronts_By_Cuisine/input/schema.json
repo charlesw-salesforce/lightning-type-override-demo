@@ -1,0 +1,14 @@
+{
+  "required": ["cuisine"],
+  "unevaluatedProperties": false,
+  "properties": {
+    "cuisine": {
+      "title": "Cuisine",
+      "description": "The cuisine type to search for (e.g. Italian, Mexican, Thai).",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": true
+    }
+  },
+  "lightning:type": "lightning__objectType"
+}

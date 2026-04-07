@@ -3,6 +3,9 @@ public with sharing class BookReservationAction {
   public class RequestWrapper {
     @InvocableVariable(required=true)
     public Reservation.ReservationRequest request;
+
+    @InvocableVariable(required=true)
+    public String restaurantName;
   }
 
   public class ResponseWrapper {
@@ -43,7 +46,8 @@ public with sharing class BookReservationAction {
         req.numberOfGuests,
         req.specialRequests,
         'CONFIRMED',
-        req.seatingType
+        req.seatingType,
+        wrapper.restaurantName
       );
       outputs.add(new ResponseWrapper(dto));
     }

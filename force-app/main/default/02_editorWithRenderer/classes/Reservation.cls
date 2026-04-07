@@ -15,6 +15,8 @@ public with sharing class Reservation {
     public String specialRequests;
     @InvocableVariable
     public String seatingType;
+    @InvocableVariable
+    public String restaurantName;
 
     public ReservationRequest() {
     }
@@ -26,7 +28,8 @@ public with sharing class Reservation {
       String phone,
       Integer numberOfGuests,
       String specialRequests,
-      String seatingType
+      String seatingType,
+      String restaurantName
     ) {
       this.reservationDate = reservationDate;
       this.startTime = startTime;
@@ -35,6 +38,7 @@ public with sharing class Reservation {
       this.numberOfGuests = numberOfGuests;
       this.specialRequests = specialRequests;
       this.seatingType = seatingType;
+      this.restaurantName = restaurantName;
     }
   }
 
@@ -57,6 +61,8 @@ public with sharing class Reservation {
     public String status;
     @InvocableVariable
     public String seatingType;
+    @InvocableVariable
+    public String restaurantName;
 
     public ReservationConfirmation() {
     }
@@ -70,7 +76,8 @@ public with sharing class Reservation {
       Integer numberOfGuests,
       String specialRequests,
       String status,
-      String seatingType
+      String seatingType,
+      String restaurantName
     ) {
       this.confirmationCode = confirmationCode;
       this.reservationDate = reservationDate;
@@ -81,6 +88,7 @@ public with sharing class Reservation {
       this.specialRequests = specialRequests;
       this.status = status;
       this.seatingType = seatingType;
+      this.restaurantName = restaurantName;
     }
   }
 }
