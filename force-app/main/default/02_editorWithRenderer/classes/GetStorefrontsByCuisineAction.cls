@@ -9,53 +9,13 @@ public with sharing class GetStorefrontsByCuisineAction {
     public String cuisine;
   }
 
-  public class StorefrontSummary {
-    @InvocableVariable(label='Name' description='The storefront name.')
-    public String name;
-
-    @InvocableVariable(label='Description' description='Storefront description.')
-    public String description;
-
-    @InvocableVariable(label='Cuisine' description='Cuisine type.')
-    public String cuisine;
-
-    @InvocableVariable(
-      label='Average Review Score'
-      description='Average review score.'
-    )
-    public Decimal averageReviewScore;
-
-    @InvocableVariable(label='Image URL' description='Storefront image URL.')
-    public String imageUrl;
-
-    @InvocableVariable(label='Phone' description='Contact phone number.')
-    public String phone;
-
-    @InvocableVariable(label='Address' description='Physical address.')
-    public String address;
-
-    @InvocableVariable(label='Type' description='Storefront type.')
-    public String storefrontType;
-  }
-
-  public class ResponseWrapper {
-    @InvocableVariable(label='Success' description='True when the action executed successfully.')
-    public Boolean success;
-
-    @InvocableVariable(label='Message' description='User-readable status message.')
-    public String message;
-
-    @InvocableVariable(label='Storefronts' description='A list of storefront summaries matching the provided cuisine.')
-    public List<StorefrontSummary> storefronts;
-  }
-
   @InvocableMethod(
     label='Get Storefronts By Cuisine'
     description='Query Storefront__c by Cuisine (contains) and return results as Apex-defined DTOs.'
   )
-  public static List<ResponseWrapper> invoke(List<RequestWrapper> requests) {
-    ResponseWrapper out = new ResponseWrapper();
-    out.storefronts = new List<StorefrontSummary>();
+  public static List<Storefront.StorefrontResponse> invoke(List<RequestWrapper> requests) {
+    Storefront.StorefrontResponse out = new Storefront.StorefrontResponse();
+    out.storefronts = new List<Storefront.StorefrontSummary>();
     out.success = false;
     out.message = null;
 
@@ -67,7 +27,7 @@ public with sharing class GetStorefrontsByCuisineAction {
     try {
       if (String.isBlank(cuisineQuery)) {
         out.message = 'cuisine is required.';
-        return new List<ResponseWrapper>{ out };
+        return new List<Storefront.StorefrontResponse>{ out };
       }
 
       List<Storefront__c> storefronts = [
@@ -87,7 +47,7 @@ public with sharing class GetStorefrontsByCuisineAction {
       ];
 
       for (Storefront__c sf : storefronts) {
-        StorefrontSummary s = new StorefrontSummary();
+        Storefront.StorefrontSummary s = new Storefront.StorefrontSummary();
         s.name = sf.Name;
         s.description = sf.Description__c;
         s.cuisine = sf.Cuisine__c;
@@ -118,6 +78,6 @@ public with sharing class GetStorefrontsByCuisineAction {
       out.message = e.getMessage();
     }
 
-    return new List<ResponseWrapper>{ out };
+    return new List<Storefront.StorefrontResponse>{ out };
   }
 }

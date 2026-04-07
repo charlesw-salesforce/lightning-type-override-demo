@@ -15,7 +15,7 @@
       "description": "List of matching storefronts.",
       "maxItems": 2000,
       "items": {
-        "lightning:type": "@apexClassType/c__GetStorefrontsByCuisineAction$StorefrontSummary"
+        "lightning:type": "@apexClassType/c__Storefront$StorefrontSummary"
       },
       "lightning:type": "lightning__listType",
       "lightning:isPII": false,

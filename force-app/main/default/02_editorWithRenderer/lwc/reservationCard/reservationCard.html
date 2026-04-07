@@ -24,9 +24,16 @@
               <h2 class="slds-text-heading_small slds-m-bottom_x-small">
                 Reservation Confirmed
               </h2>
-              <p class="slds-text-body_regular slds-text-color_weak">
-                Your reservation has been successfully booked
-              </p>
+              <template if:true={reservation.restaurantName}>
+                <p class="slds-text-body_regular slds-text-color_weak">
+                  {reservation.restaurantName}
+                </p>
+              </template>
+              <template if:false={reservation.restaurantName}>
+                <p class="slds-text-body_regular slds-text-color_weak">
+                  Your reservation has been successfully booked
+                </p>
+              </template>
             </div>
           </div>
         </div>

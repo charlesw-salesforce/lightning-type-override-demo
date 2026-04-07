@@ -3,11 +3,11 @@ public without sharing class AgentStorefrontActions {
     label='Get Storefronts By Name'
     description='Query Storefront__c by Name (contains) and return results as Apex-defined DTOs for reliable serialization.'
   )
-  public static List<StorefrontResponse> invoke(
+  public static List<Storefront.StorefrontResponse> invoke(
     List<StorefrontRequest> requests
   ) {
-    StorefrontResponse out = new StorefrontResponse();
-    out.storefronts = new List<StorefrontSummary>();
+    Storefront.StorefrontResponse out = new Storefront.StorefrontResponse();
+    out.storefronts = new List<Storefront.StorefrontSummary>();
     out.success = false;
     out.message = null;
 
@@ -19,7 +19,7 @@ public without sharing class AgentStorefrontActions {
     try {
       if (String.isBlank(nameQuery)) {
         out.message = 'storefrontName is required.';
-        return new List<StorefrontResponse>{ out };
+        return new List<Storefront.StorefrontResponse>{ out };
       }
 
       List<Storefront__c> storefronts = [
@@ -39,7 +39,7 @@ public without sharing class AgentStorefrontActions {
       ];
 
       for (Storefront__c sf : storefronts) {
-        StorefrontSummary s = new StorefrontSummary();
+        Storefront.StorefrontSummary s = new Storefront.StorefrontSummary();
         s.name = sf.Name;
         s.description = sf.Description__c;
         s.cuisine = sf.Cuisine__c;
@@ -71,7 +71,7 @@ public without sharing class AgentStorefrontActions {
       out.message = e.getMessage();
     }
 
-    return new List<StorefrontResponse>{ out };
+    return new List<Storefront.StorefrontResponse>{ out };
   }
 
   public class StorefrontRequest {
@@ -81,75 +81,5 @@ public without sharing class AgentStorefrontActions {
       required=true
     )
     public String storefrontName;
-  }
-
-  public class StorefrontSummary {
-    @InvocableVariable(
-      label='Name'
-      description='The storefront name (Storefront__c.Name).'
-    )
-    public String name;
-
-    @InvocableVariable(
-      label='Description'
-      description='Storefront description (Storefront__c.Description__c).'
-    )
-    public String description;
-
-    @InvocableVariable(
-      label='Cuisine'
-      description='Cuisine type (Storefront__c.Cuisine__c).'
-    )
-    public String cuisine;
-
-    @InvocableVariable(
-      label='Average Review Score'
-      description='Average review score (Storefront__c.Average_Review_Score__c).'
-    )
-    public Decimal averageReviewScore;
-
-    @InvocableVariable(
-      label='Image URL'
-      description='Storefront image URL (Storefront__c.Image_URL__c).'
-    )
-    public String imageUrl;
-
-    @InvocableVariable(
-      label='Phone'
-      description='Contact phone number (Storefront__c.Phone__c).'
-    )
-    public String phone;
-
-    @InvocableVariable(
-      label='Address'
-      description='Physical address (Storefront__c.Address__c).'
-    )
-    public String address;
-
-    @InvocableVariable(
-      label='Type'
-      description='Storefront type (Storefront__c.Type__c).'
-    )
-    public String storefrontType;
-  }
-
-  public class StorefrontResponse {
-    @InvocableVariable(
-      label='Success'
-      description='True when the action executed successfully. False when inputs are missing/invalid or an unexpected error occurred.'
-    )
-    public Boolean success;
-
-    @InvocableVariable(
-      label='Message'
-      description='User-readable status message. On errors, explains what was missing or what failed.'
-    )
-    public String message;
-
-    @InvocableVariable(
-      label='Storefronts'
-      description='A list of storefront summaries matching the provided storefrontName.'
-    )
-    public List<StorefrontSummary> storefronts;
   }
 }
