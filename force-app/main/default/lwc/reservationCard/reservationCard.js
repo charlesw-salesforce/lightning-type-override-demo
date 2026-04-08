@@ -19,7 +19,8 @@ export default class ReservationCard extends LightningElement {
 
   get formattedDate() {
     if (!this.reservation?.reservationDate) return "";
-    const date = new Date(this.reservation.reservationDate);
+    const [year, month, day] = this.reservation.reservationDate.split("-");
+    const date = new Date(year, month - 1, day);
     return date.toLocaleDateString("en-US", {
       weekday: "long",
       year: "numeric",
